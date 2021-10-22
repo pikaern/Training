@@ -9,48 +9,47 @@ import {
 } from 'react-native';
 
 
-
+import StepComponent from '../components/StepComponent';
 import Button from '../components/Button';
 
+const descriptions=[
+  {
+    id:1,
+    title: "01. Verify Phone Number",
+    description: "Fill in your phone number and follow cross verfication",
+    color: "#49BF83",
+    image: require('../assets/phone.png'),
+  },
+  {
+    id:2,
+    title: "02. Setup Password",
+    description: "Set Your password for login and verfication.",
+    color: "#FF7B00",
+    image: require('../assets/lock.png'),
+  },
+  {
+    id:3,
+    title: "03. Setup Nickname",
+    description: "Set your nickname to display and distinguish",
+    color: "#8763F4",
+    image: require('../assets/account.png'),
+  },
+  {
+    id:4,
+    title: "04. Complete Security Login",
+    description: "Choose your security identity for login",
+    color: "#06C4C9",
+    image: require('../assets/check.png'),
+  },
+];
 
 export default function InstructionScreen({navigation}){
-  const descriptions=[
-    {
-      id:1,
-      title: "01. Verify Phone Number",
-      description: "Fill in your phone number and follow cross verfication",
-      color: "#49BF83",
-      image: require('../assets/phone.png'),
-    },
-    {
-      id:2,
-      title: "02. Setup Password",
-      description: "Set Your password for login and verfication.",
-      color: "#FF7B00",
-      image: require('../assets/lock.png'),
-    },
-    {
-      id:3,
-      title: "03. Setup Nickname",
-      description: "Set your nickname to display and distinguish",
-      color: "#8763F4",
-      image: require('../assets/account.png'),
-    },
-    {
-      id:4,
-      title: "04. Complete Security Login",
-      description: "Choose your security identity for login",
-      color: "#06C4C9",
-      image: require('../assets/check.png'),
-    },
-  ];
+
   return(
     <View style={styles.container}>
-      <TouchableOpacity style={styles.navigator} onPress={()=>navigation.goBack()}>
-        <Image source={require('../assets/arrow.png')} style={styles.navigationIcon}/>
-      </TouchableOpacity>
-      <Text style={styles.title}>Register Instruction</Text>
-        { descriptions.map((item) => (
+      <StepComponent title='Register Instruction' navigation={navigation}/>
+        {
+          descriptions.map((item) => (
           <View style={{flex: 1}} key={item.id}>
             <View style={styles.row}>
 
@@ -69,7 +68,8 @@ export default function InstructionScreen({navigation}){
                   </View>
             </View>
           </View>
-        ))}
+        ))
+      }
         <Button title="Register Now" navigation={navigation} nextPage='VerifyPhone'></Button>
     </View>
   );
@@ -77,7 +77,8 @@ export default function InstructionScreen({navigation}){
 
 const styles=StyleSheet.create({
   container:{
-    padding: 30,
+    paddingTop:30,
+    padding: 20,
     backgroundColor:'#F7F7F7',
     flex: 1,
     paddingBottom: 40,
@@ -116,6 +117,7 @@ const styles=StyleSheet.create({
     paddingLeft: 50,
     paddingRight: 10,
     paddingVertical: 20,
+    left:20
   },
   row:{
     flexDirection: 'row-reverse',

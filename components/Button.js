@@ -42,7 +42,7 @@ const styles=StyleSheet.create({
   },
   btnEnd:{
     alignSelf: 'center',
-    bottom:50,
+    bottom:30,
     position: 'absolute',
 
 

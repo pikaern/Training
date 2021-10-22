@@ -10,84 +10,104 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
-import {Input} from 'react-native-elements';
+import Input from '../components/Input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
-import {IndicatorStyles} from '../components/StepIndicatorComponent';
+import StepComponent from '../components/StepComponent';
 import Button from '../components/Button';
 
+const indicatorStyles=
+{
+  stepIndicatorSize: 25,
+  currentStepIndicatorSize:30,
+  separatorStrokeWidth: 2,
+  currentStepStrokeWidth: 2,
+  stepStrokeCurrentColor: '#3365ff',
+  stepStrokeWidth: 0,
+  stepStrokeFinishedColor: '#fe7013',
+  stepStrokeUnFinishedColor: '#aaaaaa',
+  separatorFinishedColor: '#fe7013',
+  separatorUnFinishedColor: '#aaaaaa',
+  stepIndicatorFinishedColor: '#fe7013',
+  stepIndicatorUnFinishedColor: '#f7f7f7',
+  stepIndicatorCurrentColor: '#f7f7f7',
+  stepIndicatorLabelFontSize: 13,
+  currentStepIndicatorLabelFontSize: 13,
+  stepIndicatorLabelCurrentColor: '#fe7013',
+  stepIndicatorLabelFinishedColor: '#ffffff',
+  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+  labelColor: '#999999',
+  labelSize: 13,
+  currentStepLabelColor: '#3365FF'
+}
+const getStepIndicatorIconConfig = ({
+  position,
+  stepStatus,
+}: {
+  position: number;
+  stepStatus: string;
+}) => {
+  const iconConfig = {
+    name: 'circle',
+    color: stepStatus === 'finished' ? '#999999' : '#999999',
+    size: 15,
+  };
+  switch (position) {
+    case 0: {
+      iconConfig.name = 'check';
+      iconConfig.color= '#3365ff';
+      break;
+    }
+    case 1: {
+      iconConfig.name = 'circle';
+      iconConfig.size = 15;
+      break;
+    }
 
+  }
+  return iconConfig;
+};
 
 export default function CitizenScreen({navigation}){
   const labels=["Step 1", "Step 2"];
   const [inputStyle,setInputStyle]=useState(false);
   const [inputStyle2,setInputStyle2]=useState(false);
-  onFocus=()=>{
-    setInputStyle(true);
-    setInputStyle2(false);
-  };
 
+
+  const renderStepIndicator = (params: any) => (
+    <Icon {...getStepIndicatorIconConfig(params)} />
+);
   dismissFocus=()=>{
-    setInputStyle(false);
-    setInputStyle2(false);
     Keyboard.dismiss();
   }
 
-  onFocus2=()=>{
-    setInputStyle2(true);
-    setInputStyle(false);
-  };
+
 
   return(
 
     <TouchableWithoutFeedback onPress={dismissFocus} accessible={false}>
     <View style={styles.container}>
 
-      <TouchableOpacity style={styles.navigator} onPress={()=>navigation.goBack()}>
-        <Image source={require('../assets/arrow.png')} style={styles.navigationIcon}/>
-      </TouchableOpacity>
-      <Text style={styles.title}>Citizen ID Information</Text>
+      <StepComponent title='Citizen ID Information' navigation={navigation}/>
 
       <View style={styles.stepIndicator}>
         <StepIndicator
-          customStyles={IndicatorStyles}
+          customStyles={indicatorStyles}
           currentPosition={0}
           labels={labels}
           stepCount={2}
-          renderStepIndicator={({position,stepstatus})=>(<Icon name='circle' size={10} color='#999999'/>)}
+          renderStepIndicator={renderStepIndicator}
         />
       </View>
       <Text style={styles.descriptionText}>
         Verification
       </Text>
-      <View style={styles.textFieldContainer}>
-        <Input
-          label='NRIC Front'
-          labelStyle={styles.label}
-          inputContainerStyle={inputStyle?styles.inputFocusContainer:styles.inputContainer}
-          labelStyle= {inputStyle? styles.focusLabel:styles.label}
-          onFocus={onFocus}
-          rightIcon={
-            <Icon name='upload'
-              size={20}
-              color='#999999'/>
-          }
-        />
-        <Input
-          label='NRIC Back'
-          labelStyle={styles.label}
-          inputContainerStyle={inputStyle2?styles.inputFocusContainer:styles.inputContainer}
-          labelStyle= {inputStyle2? styles.focusLabel:styles.label}
-          onFocus={onFocus2}
-          rightIcon={
-            <Icon name='upload'
-              size={20}
-              color='#999999'/>
-          }
-        />
+      <View style={styles.entryFieldContainer}>
+        <Input label='NRIC Front' icon='upload' size={30} disable/>
+        <Input label='NRIC Back'  icon='upload' size={30} disable/>
       </View>
 
-      <Button title="Next" navigation={navigation}end></Button>
+      <Button title="Next" navigation={navigation} nextPage="PersonalInfo" end></Button>
     </View>
     </TouchableWithoutFeedback>
   );
@@ -95,87 +115,25 @@ export default function CitizenScreen({navigation}){
 
 const styles=StyleSheet.create({
   container:{
-    padding: 30,
+    paddingTop: 30,
+    padding: 20,
     backgroundColor:'#F7F7F7',
     flex: 1,
     paddingBottom: 40
-  },
-  title:{
-    fontSize: 26,
-    fontWeight: '600',
-    marginVertical: 20
-  },
-  navigator:{
-    marginTop: 20,
-  },
-
-  iconContainer:{
-    width: 70,
-    height: 70,
-    borderRadius: 20,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    right:0,
-
-  },
-  icon:{
-    width: 40,
-    height: 40,
-  },
-  descriptionContainer:{
-    backgroundColor: '#FFFFFF',
-    position: 'absolute',
-    width: 310,
-    height: 120,
-    borderRadius: 20,
-    paddingLeft: 50,
-    paddingRight: 10,
-    paddingVertical: 20,
-  },
-  row:{
-    flexDirection: 'row-reverse',
-  },
-  descriptionTitle:{
-    fontSize: 18,
-    fontWeight: '500',
   },
   descriptionText:{
     fontSize: 20,
     color: '#000000',
     marginVertical: 10,
   },
-  navigationIcon:{
-    width:20,
-    height:20,
-  },
-  justifyEnd:{
-    alignSelf: 'flex-end'
-  },
-  textFieldContainer:{
+
+  entryFieldContainer:{
     marginVertical: 10,
     width: "100%",
     flexWrap: 'wrap',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    paddingVertical: 20,
-    paddingHorizontal: 10
+    paddingVertical: 10,
+    paddingHorizontal: 8
   },
-  label:{
-    fontWeight: 'normal',
-    fontSize:14,
-    color: '#000000'
-  },
-  focusLabel:{
-    color: '#3365FF',
-    fontWeight: 'normal',
-    fontSize:14,
-  },
-  inputFocusContainer:{
-    borderColor:'#3365FF'
-  },
-  inputContainer:{
-    borderColor: '#000000'
-  }
 });

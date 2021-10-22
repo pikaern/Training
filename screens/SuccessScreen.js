@@ -8,60 +8,60 @@ import {
   Image,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard,
-  TextInput
+  Keyboard
 } from 'react-native';
-import Input from '../components/Input';
+import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import StepComponent from '../components/StepComponent';
 import Button from '../components/Button';
 
 
-export default function VerifyPhoneScreen({navigation}){
+export default function SuccessScreen({navigation}){
+  const [inputStyle,setInputStyle]=useState(false);
 
-  dismissKeyboard=()=>{
+  onFocus=()=>{
+    setInputStyle(true);
+  };
+
+  dismissFocus=()=>{
+    setInputStyle(false);
     Keyboard.dismiss();
   }
-
   return(
-    <TouchableWithoutFeedback onPress={dismissKeyboard} accessible={false}>
-      <View style={styles.container}>
-        <StepComponent title='Verify Phone Number' description='Please enter your phone number to verify your information.' navigation={navigation}/>
-        <View style={styles.entryFieldContainer}>
-          <Input icon='mobile' iconSize={30} label='Enter your phone number'/>
-        </View>
-        <Button title="Next" navigation={navigation} nextPage='SetupPassword' end></Button>
-      </View>
-    </TouchableWithoutFeedback>
+
+    <View style={styles.container}>
+      <Icon name='check-circle' color='#3365ff' size={150}/>
+      <Text style={styles.title}>
+        SUCCESS
+      </Text>
+      <Text style={styles.descriptionText}>
+        Your are ready to use Sunline app login now to help you easily save more money.
+      </Text>
+
+      <Button title="Done" navigation={navigation} nextPage='Citizen' end></Button>
+    </View>
 
   );
 };
-const textInput={
-  height: 40,
-  width:'100%',
-  borderBottomWidth: 1,
-  borderColor:'#000000'
-}
-
 
 const styles=StyleSheet.create({
   container:{
-    paddingTop: 30,
+    paddingTop:30,
     padding: 20,
     backgroundColor:'#F7F7F7',
     flex: 1,
-    paddingBottom: 40
+    paddingBottom: 40,
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems:'center'
   },
   title:{
     fontSize: 26,
     fontWeight: '600',
-    marginTop: 20,
-    marginBottom:10
+    marginVertical: 20,
+    textAlign: 'center'
   },
   navigator:{
     marginTop: 20,
-    flexWrap: 'wrap',
-    width: 20
   },
 
   iconContainer:{
@@ -97,10 +97,13 @@ const styles=StyleSheet.create({
     fontWeight: '500',
   },
   descriptionText:{
-    fontSize: 14,
+    fontSize: 18,
     color: '#999999',
     marginTop: 10,
-    marginBottom:10
+    marginHorizontal: 20,
+    alignSelf: 'center',
+    textAlign: 'center',
+
   },
   navigationIcon:{
     width:20,
@@ -109,14 +112,14 @@ const styles=StyleSheet.create({
   justifyEnd:{
     alignSelf: 'flex-end'
   },
-  entryFieldContainer:{
+  textFieldContainer:{
     marginVertical: 10,
     width: "100%",
     flexWrap: 'wrap',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 8
+    paddingVertical: 20,
+    paddingHorizontal: 10
   },
   label:{
     fontWeight: 'normal',
@@ -133,24 +136,5 @@ const styles=StyleSheet.create({
   },
   inputContainer:{
     borderColor: '#000000'
-  },
-
-  icon:{
-    position: 'absolute',
-
-  },
-  textFieldContainer:{
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-
-  },
-  focusTextInput:{
-    ...textInput,
-    borderColor:'#3365dd',
-  },
-  textInput:{
-    ...textInput
   }
-
 });

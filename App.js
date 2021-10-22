@@ -11,6 +11,10 @@ import VerifyPhoneScreen from './screens/VerifyPhoneScreen';
 import SetupPasswordScreen from './screens/SetupPasswordScreen';
 import NicknameScreen from './screens/NicknameScreen';
 import CitizenScreen from './screens/CitizenScreen';
+import PersonalInfoScreen from './screens/PersonalInfoScreen';
+import SuccessScreen from './screens/SuccessScreen';
+import RecentTransactionScreen from './screens/RecentTransactionScreen';
+import TransactionDetailsScreen from './screens/TransactionDetailsScreen';
 
 const Stack=createNativeStackNavigator();
 
@@ -27,6 +31,10 @@ export default function App(){
         <Stack.Screen name="SetupPassword" component={SetupPasswordScreen}/>
         <Stack.Screen name="Nickname" component={NicknameScreen}/>
         <Stack.Screen name="Citizen" component={CitizenScreen}/>
+        <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen}/>
+        <Stack.Screen name="SuccessScreen" component={SuccessScreen}/>
+        <Stack.Screen name="RecentTransaction" component={RecentTransactionScreen}/>
+        <Stack.Screen name="TransactionDetails" component={TransactionDetailsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
 );
