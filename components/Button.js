@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function Button({title, alt, navigation, nextPage, end}){
+export default function Button({title, alt, navigation, nextPage, end, onPress}){
   return(
 
-      <TouchableOpacity onPress={()=>navigation.navigate(nextPage)} style={[styles.buttonContainer, alt? styles.btnAltColor:styles.btnColor, end? styles.btnEnd: null]}>
+      <TouchableOpacity onPress={nextPage?()=>navigation.navigate(nextPage):onPress} style={[styles.buttonContainer, alt? styles.btnAltColor:styles.btnColor, end? styles.btnEnd: null]}>
         <Text style={[styles.buttonText, alt? styles.btnAltColor: styles.btnColor]}>{title}</Text>
       </TouchableOpacity>
 

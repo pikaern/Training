@@ -17,7 +17,28 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function Input({label, icon, iconSize, disable}){
   const [focusStyle,setFocusStyle]=useState(false);
   let focus=false;
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
   onFocus=()=>{
     setFocusStyle(true);
   }
@@ -31,6 +52,7 @@ export default function Input({label, icon, iconSize, disable}){
       <View style={styles.textFieldContainer}>
         <Icon style={styles.icon} name={icon} size={iconSize} color='#000000'/>
         <TextInput editable={!disable} style={focusStyle? styles.focusTextInput: styles.textInput} onFocus={onFocus} onBlur={dismissFocus}/>
+       
       </View>
     </View>
   );

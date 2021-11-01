@@ -51,9 +51,6 @@ const indicatorStyles=
 const getStepIndicatorIconConfig = ({
   position,
   stepStatus,
-}: {
-  position: number;
-  stepStatus: string;
 }) => {
   const iconConfig = {
     name: 'circle',
@@ -114,13 +111,36 @@ export default function PersonalInfoScreen({navigation}){
     {label: 'Singapore', value: 'singapore'},
     {label: 'Thailand', value: 'thailand'},
   ]);
-  const renderStepIndicator = (params: any) => (
+  const renderStepIndicator = (params) => (
     <Icon {...getStepIndicatorIconConfig(params)} />
   );
 
 
   const [focusStyle,setFocusStyle]=useState(false);
   let focus=false;
+
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
 
   onFocus=()=>{
     setFocusStyle(true);
@@ -182,7 +202,7 @@ export default function PersonalInfoScreen({navigation}){
             />
             <Input label='Full Name (complete as per IC)' />
             <Input label='Date of Birth'/>
-
+        
             <Text style={styles.label}>Place of Birth</Text>
             <DropDownPicker
               open={birthPlaceOpen}

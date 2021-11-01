@@ -15,6 +15,10 @@ import PersonalInfoScreen from './screens/PersonalInfoScreen';
 import SuccessScreen from './screens/SuccessScreen';
 import RecentTransactionScreen from './screens/RecentTransactionScreen';
 import TransactionDetailsScreen from './screens/TransactionDetailsScreen';
+import HomePage from './screens/HomePage';
+import VoucherList from './screens/VoucherList';
+import VoucherOutlook from './screens/VoucherOutlook';
+import VoucherDetails from './screens/VoucherDetails';
 
 const Stack=createNativeStackNavigator();
 
@@ -35,6 +39,11 @@ export default function App(){
         <Stack.Screen name="SuccessScreen" component={SuccessScreen}/>
         <Stack.Screen name="RecentTransaction" component={RecentTransactionScreen}/>
         <Stack.Screen name="TransactionDetails" component={TransactionDetailsScreen}/>
+        <Stack.Screen name="HomePage" component={HomePage}/>
+        <Stack.Screen name="VoucherList" component={VoucherList}/>
+        <Stack.Screen name="VoucherOutlook" component={VoucherOutlook}/>
+        <Stack.Screen name="VoucherDetails" component={VoucherDetails}/>
+
       </Stack.Navigator>
     </NavigationContainer>
 );

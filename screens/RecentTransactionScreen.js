@@ -124,7 +124,7 @@ export default function NicknameScreen({navigation}){
       {
         data.map((item)=>(
           <View style={styles.transactionContainer}>
-            <Text style={styles.date}>
+            <Text key={item[0].date} style={styles.date}>
               {item[0].date}
             </Text>
 

@@ -16,7 +16,7 @@ export default function LoginScreen({navigation}){
       style={styles.imageContainer}
       imageStyle={styles.image}>
       <View style={styles.container}>
-        <Button title="Login" alt navigation={navigation} nextPage='RecentTransaction'></Button>
+        <Button title="Login" alt navigation={navigation} nextPage='HomePage'></Button>
         <Button title="Sign Up" navigation={navigation} nextPage='Instruction'></Button>
       </View>
     </ImageBackground>
