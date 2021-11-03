@@ -2,7 +2,7 @@ import React,  {useState} from "react";
 import {View, StyleSheet, TouchableOpacity,Text, SafeAreaView, Image, ScrollView, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Barcode from '@kichiyaki/react-native-barcode-generator';
-import Button from "../components/Button";
+import Button from "../elements/Button";
 
 export default function VoucherDetails({navigation, route}){
     const [redeem, setRedeem] = useState(false);
@@ -40,8 +40,8 @@ export default function VoucherDetails({navigation, route}){
                 </TouchableOpacity>
                 <Text style={styles.title}>{params.title}</Text>
             </View>
-            <ScrollView>
-            <View>
+            <ScrollView >
+            <View >
                 <View>
                     <Image source={params.background} style={styles.coverImage}/>
                     <Image source={params.logo} style={styles.logo}/>
@@ -135,8 +135,8 @@ export default function VoucherDetails({navigation, route}){
 const styles=StyleSheet.create({
     container:{
         flex:1,
-        padding: 20,
-        margin:10
+        padding: 30,
+        backgroundColor: '#F7F7F7'
     },
     row:{
         flexDirection:'row',
@@ -166,16 +166,17 @@ const styles=StyleSheet.create({
         height: 220,
         resizeMode: 'stretch',
         alignSelf:'center',
-        marginTop: 10
+        marginTop: 10,
+        
     },
     logo:{
-        width: 50,
-        height:50,
+        width: 45,
+        height:45,
         position: 'absolute',
         borderWidth:1,
         borderColor: '#ffffff',
-        left: 330,
-        top: 200
+        right:30,
+        top: 210,
     },
     description:{
         color: '#3365FF',
@@ -235,7 +236,8 @@ const styles=StyleSheet.create({
         margin:15
     },
     barcodeContainer:{
-        height: 100
+        height: 100,
+        alignItems:'center'
     },
     
     dropdownRow: {

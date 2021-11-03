@@ -12,10 +12,10 @@ import {
   TextInput,
   ScrollView
 } from 'react-native';
-import Input from '../components/Input';
-import StepComponent from '../components/StepComponent';
+import Input from '../elements/Input';
+import StepComponent from '../elements/StepComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from '../components/Button';
+import Button from '../elements/Button';
 import getImageForPaymentMethod from '../utils/getImageForPaymentMethod';
 
 const data=[

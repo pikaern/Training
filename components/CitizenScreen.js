@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
-  StyleSheet,
   Text,
-  ImageBackground,
-  TouchableOpacity,
-  Image,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
-import Input from '../components/Input';
+import Input from '../elements/Input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StepIndicator from 'react-native-step-indicator';
-import StepComponent from '../components/StepComponent';
-import Button from '../components/Button';
+import StepComponent from '../elements/StepComponent';
+import Button from '../elements/Button';
+import {DEFAULT, STYLES} from '../utils/styles';
+import Space from '../elements/space';
+
 
 const indicatorStyles=
 {
@@ -43,9 +41,6 @@ const indicatorStyles=
 const getStepIndicatorIconConfig = ({
   position,
   stepStatus,
-}: {
-  position: number;
-  stepStatus: string;
 }) => {
   const iconConfig = {
     name: 'circle',
@@ -70,41 +65,34 @@ const getStepIndicatorIconConfig = ({
 
 export default function CitizenScreen({navigation}){
   const labels=["Step 1", "Step 2"];
-  const [inputStyle,setInputStyle]=useState(false);
-  const [inputStyle2,setInputStyle2]=useState(false);
-
-
-  const renderStepIndicator = (params: any) => (
+ 
+  const renderStepIndicator = (params) => (
     <Icon {...getStepIndicatorIconConfig(params)} />
 );
   dismissFocus=()=>{
     Keyboard.dismiss();
   }
 
-
-
   return(
 
     <TouchableWithoutFeedback onPress={dismissFocus} accessible={false}>
-    <View style={styles.container}>
+    <View style={DEFAULT.appContainer}>
 
       <StepComponent title='Citizen ID Information' navigation={navigation}/>
-
-      <View style={styles.stepIndicator}>
-        <StepIndicator
-          customStyles={indicatorStyles}
-          currentPosition={0}
-          labels={labels}
-          stepCount={2}
-          renderStepIndicator={renderStepIndicator}
-        />
-      </View>
-      <Text style={styles.descriptionText}>
-        Verification
-      </Text>
-      <View style={styles.entryFieldContainer}>
-        <Input label='NRIC Front' icon='upload' size={30} disable/>
-        <Input label='NRIC Back'  icon='upload' size={30} disable/>
+      <StepIndicator
+        customStyles={indicatorStyles}
+        currentPosition={0}
+        labels={labels}
+        stepCount={2}
+        renderStepIndicator={renderStepIndicator}
+      />
+      <Space value={2}/>
+      <Text style={STYLES.fontSmall}>Verification</Text>
+      <Space value={2}/>
+      <View style={DEFAULT.entryFieldContainer}>
+        <Input label='NRIC Front' icon='upload' size={40} disable/>
+        <Space value={2}/>
+        <Input label='NRIC Back'  icon='upload' size={40} disable/>
       </View>
 
       <Button title="Next" navigation={navigation} nextPage="PersonalInfo" end></Button>
@@ -112,28 +100,3 @@ export default function CitizenScreen({navigation}){
     </TouchableWithoutFeedback>
   );
 };
-
-const styles=StyleSheet.create({
-  container:{
-    paddingTop: 30,
-    padding: 20,
-    backgroundColor:'#F7F7F7',
-    flex: 1,
-    paddingBottom: 40
-  },
-  descriptionText:{
-    fontSize: 20,
-    color: '#000000',
-    marginVertical: 10,
-  },
-
-  entryFieldContainer:{
-    marginVertical: 10,
-    width: "100%",
-    flexWrap: 'wrap',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 8
-  },
-});

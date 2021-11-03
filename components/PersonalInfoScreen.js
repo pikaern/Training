@@ -3,22 +3,18 @@ import {
   View,
   StyleSheet,
   Text,
-  ImageBackground,
-  TouchableOpacity,
-  Image,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
-  TextInput,
-  Dimensions
 } from 'react-native';
-import Input from '../components/Input';
+import Input from '../elements/Input';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from '../components/Button';
+import Button from '../elements/Button';
 import StepIndicator from 'react-native-step-indicator';
 import DropDownPicker from 'react-native-dropdown-picker';
-import StepComponent from '../components/StepComponent';
+import StepComponent from '../elements/StepComponent';
+import { DEFAULT, STYLES } from '../utils/styles';
+import Space from '../elements/space';
 
 //materialTextField
 const indicatorStyles=
@@ -78,10 +74,6 @@ const getStepIndicatorIconConfig = ({
 
 export default function PersonalInfoScreen({navigation}){
   const labels=["Step 1", "Step 2"];
-  const [inputStyle,setInputStyle]=useState(false);
-  const [inputStyle2,setInputStyle2]=useState(false);
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
   const [genderOpen, setGenderOpen] = useState(false);
   const [genderValue, setGenderValue] = useState(null);
   const [gender, setGender] = useState([
@@ -123,24 +115,13 @@ export default function PersonalInfoScreen({navigation}){
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
+
 
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
 
-  const showDatepicker = () => {
-    showMode('date');
-  };
-
-  const showTimepicker = () => {
-    showMode('time');
-  };
 
   onFocus=()=>{
     setFocusStyle(true);
@@ -156,39 +137,39 @@ export default function PersonalInfoScreen({navigation}){
 
 
   return(
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <View style={styles.container}>
+    <View style={DEFAULT.appContainer}>
       <KeyboardAvoidingView behavior="padding">
         <TouchableWithoutFeedback onPress={dismissFocus} accessible={false} >
         <View>
           <StepComponent title='Personal Information' navigation={navigation}/>
-
-          <View style={styles.stepIndicator}>
-            <StepIndicator
-              customStyles={indicatorStyles}
-              currentPosition={0}
-              labels={labels}
-              stepCount={2}
-              renderStepIndicator={renderStepIndicator}
-            />
-          </View>
-          <Text style={styles.descriptionText}>
+          <StepIndicator
+            customStyles={indicatorStyles}
+            currentPosition={0}
+            labels={labels}
+            stepCount={2}
+            renderStepIndicator={renderStepIndicator}
+          />
+          <Space value={2}/>
+          <Text style={STYLES.fontMedium}>
             Personal Information
           </Text>
-          <View style={styles.entryFieldContainer}>
+          <Space value={2}/>
+          <View style={DEFAULT.entryFieldContainer}>
             <Text style={styles.label}>Gender</Text>
-            <DropDownPicker
-              open={genderOpen}
-              value={genderValue}
-              items={gender}
-              setOpen={setGenderOpen}
-              setValue={setGenderValue}
-              setItems={setGender}
-              style={styles.dropDownStyle}
-              placeholder= ''
-              dropDownDirection="TOP"
-            />
-            <Text style={styles.label}>Title</Text>
+            <View style={DEFAULT.inputFieldContainer}>
+              <DropDownPicker
+                open={genderOpen}
+                value={genderValue}
+                items={gender}
+                setOpen={setGenderOpen}
+                setValue={setGenderValue}
+                setItems={setGender}
+                style={styles.dropDownStyle}
+                placeholder= ''
+                dropDownDirection="TOP"
+              />
+            </View>
+            <Text>Title</Text>
             <DropDownPicker
               open={titleOpen}
               value={titleValue}
@@ -203,7 +184,7 @@ export default function PersonalInfoScreen({navigation}){
             <Input label='Full Name (complete as per IC)' />
             <Input label='Date of Birth'/>
         
-            <Text style={styles.label}>Place of Birth</Text>
+            <Text>Place of Birth</Text>
             <DropDownPicker
               open={birthPlaceOpen}
               value={birthPlaceValue}
@@ -216,7 +197,7 @@ export default function PersonalInfoScreen({navigation}){
               dropDownDirection="TOP"
             />
 
-            <Text style={styles.label}>Nationality</Text>
+            <Text>Nationality</Text>
             <DropDownPicker
               open={nationalityOpen}
               value={nationalityValue}
@@ -234,7 +215,7 @@ export default function PersonalInfoScreen({navigation}){
       </KeyboardAvoidingView>
 
       <Button title="Next" navigation={navigation} nextPage="SuccessScreen" end></Button>
-    </View>
+
   </View>
 
   );
@@ -257,19 +238,11 @@ const label={
 }
 
 const styles=StyleSheet.create({
-  container:{
-    paddingTop: 30,
-    padding: 20,
-    backgroundColor:'#F7F7F7',
-    flex: 1,
-  },
+ 
   dropDownStyle:{
     borderWidth: 0,
     borderBottomWidth: 1,
-    height:40,
-    right: 10,
-    width: 340,
-    marginHorizontal: 20
+    ...DEFAULT.inputFieldContainer
   },
   modalStyle:{
     backgroundColor: '#ffffff',
@@ -293,15 +266,6 @@ const styles=StyleSheet.create({
     marginVertical: 10,
   },
 
-  entryFieldContainer:{
-    marginVertical: 10,
-    width: "100%",
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    paddingBottom: 10,
-    paddingHorizontal: 8,
-
-  },
   verifyFieldContainer:{
     marginVertical: 10,
     width: "100%",

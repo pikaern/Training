@@ -20,7 +20,7 @@ const styles=StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderRadius: 15,
-    width: '100%',
+    minWidth: 350,
     height: 55,
     borderColor: '#FFFFFF',
     justifyContent: 'center',
@@ -42,7 +42,7 @@ const styles=StyleSheet.create({
   },
   btnEnd:{
     alignSelf: 'center',
-    bottom:30,
+    bottom:20,
     position: 'absolute',
 
 

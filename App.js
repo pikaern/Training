@@ -5,20 +5,20 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen';
-import InstructionScreen from './screens/InstructionScreen';
-import VerifyPhoneScreen from './screens/VerifyPhoneScreen';
-import SetupPasswordScreen from './screens/SetupPasswordScreen';
-import NicknameScreen from './screens/NicknameScreen';
-import CitizenScreen from './screens/CitizenScreen';
-import PersonalInfoScreen from './screens/PersonalInfoScreen';
-import SuccessScreen from './screens/SuccessScreen';
-import RecentTransactionScreen from './screens/RecentTransactionScreen';
-import TransactionDetailsScreen from './screens/TransactionDetailsScreen';
-import HomePage from './screens/HomePage';
-import VoucherList from './screens/VoucherList';
-import VoucherOutlook from './screens/VoucherOutlook';
-import VoucherDetails from './screens/VoucherDetails';
+import LoginScreen from './components/LoginScreen';
+import InstructionScreen from './components/InstructionScreen';
+import VerifyPhoneScreen from './components/VerifyPhoneScreen';
+import SetupPasswordScreen from './components/SetupPasswordScreen';
+import NicknameScreen from './components/NicknameScreen';
+import CitizenScreen from './components/CitizenScreen';
+import PersonalInfoScreen from './components/PersonalInfoScreen';
+import SuccessScreen from './components/SuccessScreen';
+import RecentTransactionScreen from './components/RecentTransactionScreen';
+import TransactionDetailsScreen from './components/TransactionDetailsScreen';
+import HomePage from './components/HomePage';
+import VoucherList from './components/VoucherList';
+import VoucherOutlook from './components/VoucherOutlook';
+import VoucherDetails from './components/VoucherDetails';
 
 const Stack=createNativeStackNavigator();
 

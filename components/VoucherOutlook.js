@@ -56,15 +56,15 @@ const styles=StyleSheet.create({
         color: '#ffc32b',
         fontSize:25,
         fontWeight:'bold',
-        margin:20
+        margin:20,
     },
     voucherCover:{
-        width: 400,
+        width: 350,
+        height:250,
         resizeMode:'stretch'
     },
     voucherContainer:{
-        height:300,
-      
+        height:250,
         justifyContent:'center',
         alignItems:'center'
     },
@@ -73,15 +73,15 @@ const styles=StyleSheet.create({
         width: 50,
         position:'absolute',
         bottom:0,
-        top:280,
+        top:220,
         borderWidth: 2,
         borderColor: '#ffffff',
-        borderRadius: 5
+        borderRadius: 3
     },
     voucherTitle:{
         fontWeight: 'bold',
         fontSize: 24,
-        marginTop: 60,
+        marginTop: 50,
         color: '#ffffff'
     },
     voucherDescription:{
@@ -91,7 +91,7 @@ const styles=StyleSheet.create({
         color: '#ffffff'
     },
     icon:{
-        marginTop:20
+        marginTop:120
     },
     rewardText:{
         color:'#ffffff',
